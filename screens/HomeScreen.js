@@ -13,6 +13,9 @@ export default class HomeScreen extends React.Component {
     this.state = {
       text: '',
       displayText: '',
+      word:'',
+      definition:'',
+      lexicalCategory:'',
     };
   }
 
@@ -31,13 +34,12 @@ export default class HomeScreen extends React.Component {
       .then((response) => {
         var responseObject = response;
         if (responseObject) {
-          var wordData = responseObject.definations[0];
-          console.log(responseObject.definations[0]);
-          var defination = wordData.description;
-          var lexicalCategory = wordData.wordtype;
+          var wordData = responseObject.definitions[0]
+          var definition = wordData.description
+          var lexicalCategory = wordData.wordtype
           this.setState({
             word: this.state.text,
-            defination: defination,
+            definition: definition,
             lexicalCategory: lexicalCategory,
           });
         } else {
@@ -45,7 +47,7 @@ export default class HomeScreen extends React.Component {
             word: this.state.text,
             word: 'PLEASE ENTER THE CORRECT SPELLING :(',
             lexicalCategory: 'NOT FOUND :(',
-            defination: 'NOT FOUND :(',
+            definition: 'NOT FOUND :(',
           });
         }
       });
@@ -63,7 +65,7 @@ export default class HomeScreen extends React.Component {
               word: 'Loading...',
               lexicalCategory: '',
               examples: [],
-              defination: '',
+              definition: '',
             });
           }}
           value={this.state.text}
@@ -91,8 +93,8 @@ export default class HomeScreen extends React.Component {
 
           <View>
             {/*  style={{ flexDirection: 'row' ,flexWrap: 'wrap'}}> */}
-            <Text style={styles.detailsTitle}>Defination: {'  '}</Text>
-            <Text style={{ fontSize: 18 }}>{this.state.defination}</Text>
+            <Text style={styles.detailsTitle}>Definition: {'  '}</Text>
+            <Text style={{ fontSize: 18 }}>{this.state.definition}</Text>
           </View>
         </View>
       </View>
